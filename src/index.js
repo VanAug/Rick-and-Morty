@@ -233,10 +233,53 @@ const displayLocations = () => {
 }
 
 const displayEpisodes = () => {
-    
+    const allEpisodes = document.querySelector("#episodes")
+
+    // Pagination Button implementation
+
+    const loadMoreBtn = document.createElement("button");
+
+    loadMoreBtn.classList.add("more-locations")
+    loadMoreBtn.textContent = "More";
+
+    // Fetch Locations
+
+    const fetchLocations = (url) => {
+        fetch(url)
+        .then( response => response.json())
+        .then( episodes => {
+            console.log(episodes)
+            episodes.results.forEach( episode => {
+                const episodesCard = document.createElement("div");
+                episodesCard.classList.add("all-characters-cards");
+
+                episodesCard.innerHTML = `
+                    <div class="episodes-info">
+                        <h3 class="episodes-names">${episode.name}</h3>
+                        <p class="episodes-air_date"><strong>Air Date</strong>: ${episode.air_date}</p>
+                        <p class="episode"><strong>Episode</strong>: ${episode.episode}</p>
+                    </div>
+                `
+                display.appendChild(episodesCard);
+                document.body.appendChild(loadMoreBtn);
+            })
+            nextEpisodesPageUrl = episodes.info.next // Update next page url 
+        })
+    }
+    allEpisodes.addEventListener("click", () => {
+        display.innerHTML = ""
+        fetchLocations(nextEpisodesPageUrl)
+    })
+
+    loadMoreBtn.addEventListener("click", () => {
+        if (nextEpisodesPageUrl) {
+            fetchLocations(nextEpisodesPageUrl);
+        }
+    });
 }
 
 displayMainCharactersfromJSONDB();
 displayCharacters();
 displayLocations()
+displayEpisodes()
 
