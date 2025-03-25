@@ -124,8 +124,8 @@
 }
 
 .all-characters-imgs {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
 }
 
@@ -144,7 +144,7 @@
     margin: 2px 0;
 }
 
-.more {
+.more-characters, .more-locations {
     display: block;
     margin: 20px auto;
     padding: 10px 20px;
@@ -158,7 +158,7 @@
     transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.more:hover {
+.more-characters, .more-locations:hover {
     background-color: #03fd0f;
     transform: scale(1.05);
 }

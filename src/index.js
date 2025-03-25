@@ -1,5 +1,10 @@
+// Global variables
 const display = document.querySelector(".display-characters");
 const selected = document.querySelector("#selected-character")
+
+let nextCharactersPageUrl = "https://rickandmortyapi.com/api/character"; // Initial characters API URL
+let nextLocationsPageUrl = "https://rickandmortyapi.com/api/location"; // Initial locations API URL
+let nextEpisodesPageUrl = "https://rickandmortyapi.com/api/episode"; // Initial episodes API URL
 
 const displayMainCharactersfromJSONDB = () => {
 
@@ -58,7 +63,7 @@ const displayMainCharactersfromJSONDB = () => {
             
             // Add event listener to characterCard
             
-            // Could not create callback function outside function because needed access to localized variable
+            // Could not create function outside because needed access to localized variable
             characterCard.addEventListener("click", () => {
                 fetch(`https://rickandmortyapi.com/api/character/${character.id}`, {
                     method: "GET",
@@ -89,20 +94,19 @@ const displayMainCharactersfromJSONDB = () => {
                     `
                 })
             })
-
             display.appendChild(characterCard);
-
         });
     })
 };
 
-let nextPageUrl = "https://rickandmortyapi.com/api/character"; // Initial API URL
-
 const displayCharacters = () => {
     const allCharacters = document.querySelector("#characters");
+
+    // Pagination Button implementation
+
     const loadMoreBtn = document.createElement("button");
 
-    loadMoreBtn.classList.add("more")
+    loadMoreBtn.classList.add("more-characters")
     loadMoreBtn.textContent = "More";
 
     // Fetch characters function (pass in url for pagination)
@@ -112,58 +116,57 @@ const displayCharacters = () => {
         .then(response => response.json())
         .then(data => {
             data.results.forEach(character => {
-                const card = document.createElement("div");
-                    card.classList.add("all-characters-cards");
+                const allCharactersCard = document.createElement("div");
+                allCharactersCard.classList.add("all-characters-cards");
 
-                    card.innerHTML = `
-                        <img src="${character.image}" alt="${character.name}" class="all-characters-imgs">
-                        <div class="all-characters-info">
-                            <h3 class="all-characters-names">${character.name}</h3>
-                            <p class="all-characters-species">Species: ${character.species}</p>
-                            <p class="all-characters-status">Status: ${character.status}</p>
-                            <p class="all-characters-locations">Location: ${character.location.name}</p>
-                        </div>
-                    `
-                    display.appendChild(card);
-                    document.body.appendChild(loadMoreBtn); 
+                allCharactersCard.innerHTML = `
+                    <img src="${character.image}" alt="${character.name}" class="all-characters-imgs">
+                    <div class="all-characters-info">
+                        <h3 class="all-characters-names">${character.name}</h3>
+                        <p class="all-characters-species"><strong>Species</strong>: ${character.species}</p>
+                        <p class="all-characters-status"><strong>Status</strong>: ${character.status}</p>
+                        <p class="all-characters-locations"><strong>Location</strong>: ${character.location.name}</p>
+                    </div>
+                `
+                display.appendChild(allCharactersCard);
+                document.body.appendChild(loadMoreBtn); 
 
-                    // recycled code for single character display
+                // recycled code for single character display
 
-                    card.addEventListener("click", () => {
-                        fetch(`https://rickandmortyapi.com/api/character/${character.id}`, {
-                            method: "GET",
-                            headers: {
-                                "Content-Type" : "Application/json",
-                                "Accept" : "Application/json",
-                            },
-                        })
-                        .then(response => response.json())
-                        .then(characterData => {
-                            display.innerHTML = ""
-                            
-                            selected.innerHTML = `
-                                <div class="character-container">
-                                    <div class="character-info">
-                                        <h2 id="char-name">${characterData.name}</h2>
-                                        <p><strong>Status:</strong> <span id="char-status">${characterData.status}</span></p>
-                                        <p><strong>Species:</strong> <span id="char-species">${characterData.species}</span></p>
-                                        <p><strong>Gender:</strong> <span id="char-gender">${characterData.gender}</span></p>
-                                        <p><strong>Origin:</strong> <span id="char-origin">${characterData.origin.name}</span></p>
-                                        <p><strong>Location:</strong> <span id="char-location">${characterData.location.name}</span></p>
-                                    </div>
-                                    <div class="character-image">
-                                        <img id="${characterData.name}" src="https://rickandmortyapi.com/api/character/avatar/${characterData.id}.jpeg" alt="${characterData.name}">
-                                    </div>
-                                </div>
-                                
-                            `
-                        })
+                allCharactersCard.addEventListener("click", () => {
+                    fetch(`https://rickandmortyapi.com/api/character/${character.id}`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type" : "Application/json",
+                            "Accept" : "Application/json",
+                        },
                     })
-                    
+                    .then(response => response.json())
+                    .then(characterData => {
+                        display.innerHTML = ""
+                        
+                        selected.innerHTML = `
+                            <div class="character-container">
+                                <div class="character-info">
+                                    <h2 id="char-name">${characterData.name}</h2>
+                                    <p><strong>Status:</strong> <span id="char-status">${characterData.status}</span></p>
+                                    <p><strong>Species:</strong> <span id="char-species">${characterData.species}</span></p>
+                                    <p><strong>Gender:</strong> <span id="char-gender">${characterData.gender}</span></p>
+                                    <p><strong>Origin:</strong> <span id="char-origin">${characterData.origin.name}</span></p>
+                                    <p><strong>Location:</strong> <span id="char-location">${characterData.location.name}</span></p>
+                                </div>
+                                <div class="character-image">
+                                    <img id="${characterData.name}" src="https://rickandmortyapi.com/api/character/avatar/${characterData.id}.jpeg" alt="${characterData.name}">
+                                </div>
+                            </div>
+                            
+                        `
+                    })
                 })
-            
-                // Update the nextPageUrl ( There is a property in the data returns that allows this)
-            nextPageUrl = data.info.next; // Update the next page URL
+                    
+            })            
+            // Update the nextPageUrl ( There is a property in the data returns that allows this)
+            nextCharactersPageUrl = data.info.next // Update the next page URL
         })
     };
 
@@ -171,28 +174,69 @@ const displayCharacters = () => {
 
     allCharacters.addEventListener("click", () => {
         display.innerHTML = ""
-        fetchCharacters(nextPageUrl);
+        fetchCharacters(nextCharactersPageUrl);
     });
 
     // attach event listener to page button
 
     loadMoreBtn.addEventListener("click", () => {
-        if (nextPageUrl) {
-            fetchCharacters(nextPageUrl);
+        if (nextCharactersPageUrl) {
+            fetchCharacters(nextCharactersPageUrl);
         }
     });
 };
 
-
 const displayLocations = () => {
-    
+    const allLocations = document.querySelector("#locations")
+
+    // Pagination Button implementation
+
+    const loadMoreBtn = document.createElement("button");
+
+    loadMoreBtn.classList.add("more-locations")
+    loadMoreBtn.textContent = "More";
+
+    // Fetch Locations
+
+    const fetchLocations = (url) => {
+        fetch(url)
+        .then( response => response.json())
+        .then( locations => {
+            console.log(locations)
+            locations.results.forEach( location => {
+                const locationsCard = document.createElement("div");
+                locationsCard.classList.add("all-characters-cards");
+
+                locationsCard.innerHTML = `
+                    <div class="locations-info">
+                        <h3 class="locations-names">${location.name}</h3>
+                        <p class="locations-type"><strong>Type</strong>: ${location.type}</p>
+                        <p class="locations-dimension"><strong>Dimension</strong>: ${location.dimension}</p>
+                    </div>
+                `
+                display.appendChild(locationsCard);
+                document.body.appendChild(loadMoreBtn);
+            })
+            nextLocationsPageUrl = locations.info.next // Update next page url 
+        })
+    }
+    allLocations.addEventListener("click", () => {
+        display.innerHTML = ""
+        fetchLocations(nextLocationsPageUrl)
+    })
+
+    loadMoreBtn.addEventListener("click", () => {
+        if (nextLocationsPageUrl) {
+            fetchLocations(nextLocationsPageUrl);
+        }
+    });
 }
 
 const displayEpisodes = () => {
     
 }
 
-displayCharacters();
-
 displayMainCharactersfromJSONDB();
+displayCharacters();
+displayLocations()
 
