@@ -1,5 +1,6 @@
 const displayCharactersfromJSONDB = () => {
     const display = document.querySelector(".display-characters");
+    const selected = document.querySelector("#selected-character")
 
     fetch("http://localhost:3000/characters", {
         method: "GET",
@@ -54,17 +55,52 @@ const displayCharactersfromJSONDB = () => {
             characterCard.appendChild(characterImage);
             characterCard.appendChild(cardContent);
 
+            // Add event listener to characterCard
+
+            // Could not create callback function outside function because needed access to localized variable
+            characterCard.addEventListener("click", () => {
+                fetch(`https://rickandmortyapi.com/api/character/${character.id}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type" : "Application/json",
+                        "Accept" : "Application/json",
+                    },
+                })
+                .then(response => response.json())
+                .then(characterData => {
+                    console.log(characterData)
+                    display.innerHTML = ""
+
+                    selected.innerHTML = `
+                        <div class="character-container">
+                            <div class="character-info">
+                                <h2 id="char-name">${characterData.name}</h2>
+                                <p><strong>Status:</strong> <span id="char-status">${characterData.status}</span></p>
+                                <p><strong>Species:</strong> <span id="char-species">${characterData.species}</span></p>
+                                <p><strong>Gender:</strong> <span id="char-gender">${characterData.gender}</span></p>
+                                <p><strong>Origin:</strong> <span id="char-origin">${characterData.origin.name}</span></p>
+                                <p><strong>Location:</strong> <span id="char-location">${characterData.location.name}</span></p>
+                            </div>
+                            <div class="character-image">
+                                <img id="${characterData.name}" src="https://rickandmortyapi.com/api/character/avatar/${characterData.id}.jpeg" alt="${characterData.name}">
+                            </div>
+                        </div>
+
+                    `
+                    console.log(selected)
+                })
+            })
+
             // Append card to display container
             display.appendChild(characterCard);
 
         });
-        console.log(display)
     })
     .catch(error => console.error("Error fetching characters:", error));
 };
 
 function displayCharacterDetails() {
-    
+
 }
 
 displayCharactersfromJSONDB();
