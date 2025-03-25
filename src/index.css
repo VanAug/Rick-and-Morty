@@ -1,0 +1,105 @@
+#top-bar {
+    height: 30vh;
+    background: rgb(5, 238, 36);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0 10px;
+    overflow: hidden; 
+}
+
+#top-bar img {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    object-fit: cover; /* Ensures the image scales nicely */
+    opacity: 0.8; 
+}
+
+#top-bar h2 {
+    font-size: 3.5rem; 
+    font-weight: bold;
+    color: rgb(2, 2, 2); 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+    z-index: 1; 
+}
+
+#selection {
+    display: flex;
+    justify-content: center;
+    gap: 25px; 
+    margin: 30px 0;
+}
+
+#selection button {
+    background-color: #073e6b; /* Bright green (matches the show's aesthetic) */
+    color: black;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+#selection button:hover {
+    background-color: #08f014; /* Darker green on hover */
+    transform: scale(1.1); /* Slight zoom effect */
+}
+
+#selection button:active {
+    transform: scale(1); /* Reset scale on click */
+    background-color: #2ef706;
+}
+
+.display-characters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.card {
+    width: 150px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin: 10px;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card-content {
+    padding: 15px;
+}
+
+.name {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+.status {
+    font-size: 1em;
+    color: #555;
+}
+.gender {
+    font-size: 1em;
+    color: #555;
+}
+.species {
+    font-size: 1em;
+    color: #555;
+}
+
+
+
