@@ -125,6 +125,20 @@
         "name": "Earth (Replacement Dimension)"
       },
       "image": "https://rickandmortyapi.com/api/character/avatar/672.jpeg"
+    },
+    {
+      "id": "1",
+      "name": "Rick Sanchez",
+      "status": "Alive",
+      "species": "Human",
+      "gender": "Male",
+      "origin": {
+        "name": "Earth (C-137)"
+      },
+      "location": {
+        "name": "Citadel of Ricks"
+      },
+      "image": "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
     }
   ],
   "disliked": [
@@ -183,6 +197,20 @@
         "name": "Earth (Replacement Dimension)"
       },
       "image": "https://rickandmortyapi.com/api/character/avatar/138.jpeg"
+    },
+    {
+      "id": "1",
+      "name": "Rick Sanchez",
+      "status": "Alive",
+      "species": "Human",
+      "gender": "Male",
+      "origin": {
+        "name": "Earth (C-137)"
+      },
+      "location": {
+        "name": "Citadel of Ricks"
+      },
+      "image": "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
     }
   ]
 }

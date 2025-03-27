@@ -286,37 +286,36 @@ const displayEpisodes = () => {
 }
 
 const like = () => {
-    document.addEventListener("click", (event) => {
-        if (event.target.classList.contains("like-glyph")) {
-            const heart = event.target;
-            const characterContainer = heart.closest(".character-container");
-    
-            // Extract character data from the DOM
-            const characterData = {
-                id: heart.getAttribute("data-character-id"),
-                name: characterContainer.querySelector("#char-name").textContent,
-                status: characterContainer.querySelector("#char-status").textContent,
-                species: characterContainer.querySelector("#char-species").textContent,
-                gender: characterContainer.querySelector("#char-gender").textContent,
-                origin: { name: characterContainer.querySelector("#char-origin").textContent },
-                location: { name: characterContainer.querySelector("#char-location").textContent },
-                image: characterContainer.querySelector("img").src
-            };
-    
-            fetch("https://your-app-name.onrender.com/api/favorites", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                },
-                body: JSON.stringify(characterData)
-            })
-            .then(response => response.json())
-            .then(() => {
-                heart.textContent = FULL_HEART;
-                heart.classList.add("activated-heart");
-            })
-        }
+    document.addEventListener("click", (event) => {      
+        const heart = event.target;
+        const characterContainer = heart.closest(".character-container");
+
+        // Extract character data from the DOM
+        const characterData = {
+            id: heart.getAttribute("data-character-id"),
+            name: characterContainer.querySelector("#char-name").textContent,
+            status: characterContainer.querySelector("#char-status").textContent,
+            species: characterContainer.querySelector("#char-species").textContent,
+            gender: characterContainer.querySelector("#char-gender").textContent,
+            origin: { name: characterContainer.querySelector("#char-origin").textContent },
+            location: { name: characterContainer.querySelector("#char-location").textContent },
+            image: characterContainer.querySelector("img").src
+        };
+
+        fetch("https://rick-and-morty-nlgv.onrender.com/api/favorites", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            body: JSON.stringify(characterData)
+        })
+        .then(response => response.json())
+        .then(() => {
+            heart.textContent = FULL_HEART;
+            heart.classList.add("activated-heart");
+        })
+        
     });   
 }
 
@@ -324,7 +323,7 @@ const favoriteCharacters = () => {
     const favorites = document.querySelector("#like");
 
     favorites.addEventListener("click", () => {
-        fetch("https://your-app-name.onrender.com/api/favorites", {
+        fetch("https://rick-and-morty-nlgv.onrender.com/api/favorites", {
             method: "GET",
             headers: {
                 "Content-Type": "Application/json",
@@ -386,32 +385,31 @@ const favoriteCharacters = () => {
 
 const dislike = () => {
     document.addEventListener("click", (event) => {
-        if (event.target.classList.contains("dislike-glyph")) {
-            const thumbDown = event.target;
-            const characterContainer = thumbDown.closest(".character-container");
-    
-            // Extract character data from the DOM
-            const characterData = {
-                id: thumbDown.getAttribute("data-character-id"),
-                name: characterContainer.querySelector("#char-name").textContent,
-                status: characterContainer.querySelector("#char-status").textContent,
-                species: characterContainer.querySelector("#char-species").textContent,
-                gender: characterContainer.querySelector("#char-gender").textContent,
-                origin: { name: characterContainer.querySelector("#char-origin").textContent },
-                location: { name: characterContainer.querySelector("#char-location").textContent },
-                image: characterContainer.querySelector("img").src
-            };
-    
-            fetch("https://your-app-name.onrender.com/api/dislike", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                },
-                body: JSON.stringify(characterData)
-            })
-            .then(response => response.json())
-        }
+        const thumbDown = event.target;
+        const characterContainer = thumbDown.closest(".character-container");
+
+        // Extract character data from the DOM
+        const characterData = {
+            id: thumbDown.getAttribute("data-character-id"),
+            name: characterContainer.querySelector("#char-name").textContent,
+            status: characterContainer.querySelector("#char-status").textContent,
+            species: characterContainer.querySelector("#char-species").textContent,
+            gender: characterContainer.querySelector("#char-gender").textContent,
+            origin: { name: characterContainer.querySelector("#char-origin").textContent },
+            location: { name: characterContainer.querySelector("#char-location").textContent },
+            image: characterContainer.querySelector("img").src
+        };
+
+        fetch("https://rick-and-morty-nlgv.onrender.com/api/disliked", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            body: JSON.stringify(characterData)
+        })
+        .then(response => response.json())
+        
     });
 }
 
@@ -419,7 +417,7 @@ const hated = () => {
     const hated = document.querySelector("#dislike");
 
     hated.addEventListener("click", () => {
-        fetch("https://your-app-name.onrender.com/api/dislike", {
+        fetch("https://rick-and-morty-nlgv.onrender.com/api/disliked", {
             method: "GET",
             headers: {
                 "Content-Type": "Application/json",
