@@ -33,6 +33,7 @@ const EMPTY_HEART = '♡';
 const FULL_HEART = '♥';
 
 const DISLIKE_EMPTY = '👎';  
+const DISLIKE_FULL = '🚫';
 
 const displayMainCharacters = () => {
 
@@ -412,6 +413,10 @@ const dislike = () => {
                 body: JSON.stringify(characterData)
             })
             .then(response => response.json())
+            .then(() => {
+                thumbDown.textContent = DISLIKE_FULL;
+                thumbDown.classList.add("activated-heart");
+            })
         }       
     });
 }
