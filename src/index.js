@@ -1,3 +1,4 @@
+
 // Global variables
 const display = document.querySelector(".display-characters");
 const selected = document.querySelector("#selected-character")
@@ -492,8 +493,112 @@ const hated = () => {
 }
 
 const filterCharacters = () => {
-    
-}
+    const filter = document.querySelector("#filter");
+
+    filter.addEventListener("click", () => {
+        display.innerHTML = "";
+
+        display.innerHTML = `
+            <form id="filterForm">
+                <div id="form-row">
+                    <input type="text" id="name" name="name" placeholder="Name">                   
+                    <select id="status" name="status">
+                        <option value="">Status</option>
+                        <option value="alive">Alive</option>
+                        <option value="dead">Dead</option>
+                        <option value="unknown">Unknown</option>
+                    </select>
+                    <input type="text" id="species" name="species" placeholder="Species">                                       
+                    <select id="gender" name="gender">
+                        <option value="">Gender</option>
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                        <option value="genderless">Genderless</option>
+                        <option value="unknown">Unknown</option>
+                    </select>
+                </div>
+                <button type="submit" id="submit-btn">Submit</button>
+            </form>
+        `;
+
+        const form = document.querySelector("#filterForm");
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            // Get form values
+            const name = document.querySelector("#name").value.trim();
+            const status = document.querySelector("#status").value;
+            const species = document.querySelector("#species").value.trim();
+            const gender = document.querySelector("#gender").value;
+
+            // Construct query parameters
+            let queryParams = [];
+            if (name) queryParams.push(`name=${name}`);
+            if (status) queryParams.push(`status=${status}`);
+            if (species) queryParams.push(`species=${species}`);
+            if (gender) queryParams.push(`gender=${gender}`);
+
+            const queryString = queryParams.length ? `?${queryParams.join("&")}` : "";
+            const apiUrl = `https://rickandmortyapi.com/api/character/${queryString}`;
+
+            // Fetch filtered characters
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    data.results.forEach(character => {
+                        const allCharactersCard = document.createElement("div");
+                        allCharactersCard.classList.add("all-characters-cards");
+                        
+                        allCharactersCard.innerHTML = `
+                        <img src="${character.image}" alt="${character.name}" class="all-characters-imgs">
+                        <div class="all-characters-info">
+                            <h3 class="all-characters-names">${character.name}</h3>
+                            <p class="all-characters-species"><strong>Species</strong>: ${character.species}</p>
+                            <p class="all-characters-status"><strong>Status</strong>: ${character.status}</p>
+                            <p class="all-characters-locations"><strong>Location</strong>: ${character.location.name}</p>
+                        </div>
+                        `
+                        display.appendChild(allCharactersCard);
+                        
+                        allCharactersCard.addEventListener("click", () => {
+                            fetch(`https://rickandmortyapi.com/api/character/${character.id}`, {
+                                method: "GET",
+                                headers: {
+                                    "Content-Type" : "Application/json",
+                                    "Accept" : "Application/json",
+                                },
+                            })
+                            .then(response => response.json())
+                            .then(characterData => {
+                                display.innerHTML = ""
+                                
+                                selected.innerHTML = `
+                                    <div class="character-container">
+                                    <div class="character-info">
+                                            <h2 id="char-name">${characterData.name}</h2>
+                                            <p><strong>Status:</strong> <span id="char-status">${characterData.status}</span></p>
+                                            <p><strong>Species:</strong> <span id="char-species">${characterData.species}</span></p>
+                                            <p><strong>Gender:</strong> <span id="char-gender">${characterData.gender}</span></p>
+                                            <p><strong>Origin:</strong> <span id="char-origin">${characterData.origin.name}</span></p>
+                                            <p><strong>Location:</strong> <span id="char-location">${characterData.location.name}</span></p>
+                                            <button class="like-glyph" data-character-id="${characterData.id}">${EMPTY_HEART}</button>
+                                            <button class="dislike-glyph" data-character-id="${characterData.id}">${DISLIKE_EMPTY}</button>
+                                        </div>
+                                        <div class="character-image">
+                                            <img id="${characterData.name}" src="https://rickandmortyapi.com/api/character/avatar/${characterData.id}.jpeg" alt="${characterData.name}">
+                                        </div>
+                                    </div>
+                                    
+                                `
+                            })
+                        })
+                    })       
+                })
+        });
+    });
+};
+
 
 displayMainCharacters()
 displayCharacters()
@@ -503,3 +608,4 @@ like()
 favoriteCharacters()
 dislike()
 hated()
+filterCharacters()

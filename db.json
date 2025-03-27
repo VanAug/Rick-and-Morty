@@ -1,5 +1,174 @@
 {
-    "favorites": [],
-    "disliked":[]
-  }
-  
+  "favorites": [
+    {
+      "id": "20",
+      "name": "Ants in my Eyes Johnson",
+      "status": "unknown",
+      "species": "Human",
+      "gender": "Male",
+      "origin": {
+        "name": "unknown"
+      },
+      "location": {
+        "name": "Interdimensional Cable"
+      },
+      "image": "https://rickandmortyapi.com/api/character/avatar/20.jpeg"
+    },
+    {
+      "id": "173",
+      "name": "Jan-Michael Vincent",
+      "status": "Alive",
+      "species": "Human",
+      "gender": "Male",
+      "origin": {
+        "name": "unknown"
+      },
+      "location": {
+        "name": "Interdimensional Cable"
+      },
+      "image": "https://rickandmortyapi.com/api/character/avatar/173.jpeg"
+    },
+    {
+      "id": "347",
+      "name": "President Curtis",
+      "status": "Alive",
+      "species": "Human",
+      "gender": "Male",
+      "origin": {
+        "name": "Earth (Replacement Dimension)"
+      },
+      "location": {
+        "name": "Earth (Replacement Dimension)"
+      },
+      "image": "https://rickandmortyapi.com/api/character/avatar/347.jpeg"
+    },
+    {
+      "id": "118",
+      "name": "Evil Morty",
+      "status": "Alive",
+      "species": "Human",
+      "gender": "Male",
+      "origin": {
+        "name": "unknown"
+      },
+      "location": {
+        "name": "Citadel of Ricks"
+      },
+      "image": "https://rickandmortyapi.com/api/character/avatar/118.jpeg"
+    },
+    {
+      "id": "180",
+      "name": "Jessica",
+      "status": "Alive",
+      "species": "Human",
+      "gender": "Female",
+      "origin": {
+        "name": "Earth (Replacement Dimension)"
+      },
+      "location": {
+        "name": "Earth (Replacement Dimension)"
+      },
+      "image": "https://rickandmortyapi.com/api/character/avatar/180.jpeg"
+    },
+    {
+      "id": "25",
+      "name": "Armothy",
+      "status": "Dead",
+      "species": "unknown",
+      "gender": "Male",
+      "origin": {
+        "name": "Post-Apocalyptic Earth"
+      },
+      "location": {
+        "name": "Post-Apocalyptic Earth"
+      },
+      "image": "https://rickandmortyapi.com/api/character/avatar/25.jpeg"
+    },
+    {
+      "id": "242",
+      "name": "Mr. Meeseeks",
+      "status": "unknown",
+      "species": "Humanoid",
+      "gender": "Male",
+      "origin": {
+        "name": "Mr. Meeseeks Box"
+      },
+      "location": {
+        "name": "Earth (Fascist Dimension)"
+      },
+      "image": "https://rickandmortyapi.com/api/character/avatar/242.jpeg"
+    },
+    {
+      "id": "244",
+      "name": "Mr. Poopybutthole",
+      "status": "Alive",
+      "species": "Poopybutthole",
+      "gender": "Male",
+      "origin": {
+        "name": "unknown"
+      },
+      "location": {
+        "name": "Earth (Replacement Dimension)"
+      },
+      "image": "https://rickandmortyapi.com/api/character/avatar/244.jpeg"
+    }
+  ],
+  "disliked": [
+    {
+      "id": "36",
+      "name": "Beta-Seven",
+      "status": "Alive",
+      "species": "Alien",
+      "gender": "unknown",
+      "origin": {
+        "name": "unknown"
+      },
+      "location": {
+        "name": "unknown"
+      },
+      "image": "https://rickandmortyapi.com/api/character/avatar/36.jpeg"
+    },
+    {
+      "id": "92",
+      "name": "Davin",
+      "status": "Dead",
+      "species": "Human",
+      "gender": "Male",
+      "origin": {
+        "name": "Earth (C-137)"
+      },
+      "location": {
+        "name": "Earth (C-137)"
+      },
+      "image": "https://rickandmortyapi.com/api/character/avatar/92.jpeg"
+    },
+    {
+      "id": "193",
+      "name": "King Jellybean",
+      "status": "Dead",
+      "species": "Mythological Creature",
+      "gender": "Male",
+      "origin": {
+        "name": "Fantasy World"
+      },
+      "location": {
+        "name": "Fantasy World"
+      },
+      "image": "https://rickandmortyapi.com/api/character/avatar/193.jpeg"
+    },
+    {
+      "id": "138",
+      "name": "General Nathan",
+      "status": "Dead",
+      "species": "Human",
+      "gender": "Male",
+      "origin": {
+        "name": "Earth (Replacement Dimension)"
+      },
+      "location": {
+        "name": "Earth (Replacement Dimension)"
+      },
+      "image": "https://rickandmortyapi.com/api/character/avatar/138.jpeg"
+    }
+  ]
+}
