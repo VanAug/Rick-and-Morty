@@ -12,3 +12,8 @@ character.
     .rickandmorty api
     .json.db "backend"
 
+### Functionalities Implemented
+    .Search
+    .Like and dislike characters
+    .filter
+
