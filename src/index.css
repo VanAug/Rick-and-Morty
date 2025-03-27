@@ -110,7 +110,7 @@
     border-radius: 10px;
 }
 
-.all-characters-cards {
+.all-characters-cards, .all-episodes-cards, .all-locations-cards   {
     background-color: #c5afaf;
     border-radius: 10px;
     padding: 10px;

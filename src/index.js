@@ -3,6 +3,28 @@
 const display = document.querySelector(".display-characters");
 const selected = document.querySelector("#selected-character")
 
+// Creating a reusable function
+const createCharacterCard = (characterData) => {
+    return `
+        <div class="character-container">
+            <div class="character-info">
+                <h2 id="char-name">${characterData.name}</h2>
+                <p><strong>Status:</strong> <span id="char-status">${characterData.status}</span></p>
+                <p><strong>Species:</strong> <span id="char-species">${characterData.species}</span></p>
+                <p><strong>Gender:</strong> <span id="char-gender">${characterData.gender}</span></p>
+                <p><strong>Origin:</strong> <span id="char-origin">${characterData.origin.name}</span></p>
+                <p><strong>Location:</strong> <span id="char-location">${characterData.location.name}</span></p>
+                <button class="like-glyph" data-character-id="${characterData.id}">${EMPTY_HEART}</button>
+                <button class="dislike-glyph" data-character-id="${characterData.id}">${DISLIKE_EMPTY}</button>
+            </div>
+            <div class="character-image">
+                <img id="${characterData.name}" src="https://rickandmortyapi.com/api/character/avatar/${characterData.id}.jpeg" alt="${characterData.name}">
+            </div>
+        </div>
+    `;
+};
+
+
 let nextCharactersPageUrl = "https://rickandmortyapi.com/api/character"; // Initial characters API URL
 let nextLocationsPageUrl = "https://rickandmortyapi.com/api/location"; // Initial locations API URL
 let nextEpisodesPageUrl = "https://rickandmortyapi.com/api/episode"; // Initial episodes API URL
@@ -82,25 +104,8 @@ const displayMainCharacters = () => {
                 .then(characterData => {
                     display.innerHTML = ""
                     
-                    selected.innerHTML = `
-                    <div class="character-container">
-                    <div class="character-info">
-                    <h2 id="char-name">${characterData.name}</h2>
-                    <p><strong>Status:</strong> <span id="char-status">${characterData.status}</span></p>
-                                <p><strong>Species:</strong> <span id="char-species">${characterData.species}</span></p>
-                                <p><strong>Gender:</strong> <span id="char-gender">${characterData.gender}</span></p>
-                                <p><strong>Origin:</strong> <span id="char-origin">${characterData.origin.name}</span></p>
-                                <p><strong>Location:</strong> <span id="char-location">${characterData.location.name}</span></p>
-                                <button class="like-glyph" data-character-id="${characterData.id}">${EMPTY_HEART}</button>
-                                <button class="dislike-glyph" data-character-id="${characterData.id}">${DISLIKE_EMPTY}</button>
-                            </div>
-                            <div class="character-image">
-                                <img id="${characterData.name}" src="https://rickandmortyapi.com/api/character/avatar/${characterData.id}.jpeg" alt="${characterData.name}">
-                            </div>
-                        </div>
-                        
-                        `
-                    })
+                    selected.innerHTML = createCharacterCard(characterData);
+                })
             })
             display.appendChild(characterCard);
         });
@@ -128,13 +133,13 @@ const displayCharacters = () => {
                 allCharactersCard.classList.add("all-characters-cards");
                 
                 allCharactersCard.innerHTML = `
-                <img src="${character.image}" alt="${character.name}" class="all-characters-imgs">
-                <div class="all-characters-info">
-                <h3 class="all-characters-names">${character.name}</h3>
-                <p class="all-characters-species"><strong>Species</strong>: ${character.species}</p>
-                <p class="all-characters-status"><strong>Status</strong>: ${character.status}</p>
-                <p class="all-characters-locations"><strong>Location</strong>: ${character.location.name}</p>
-                </div>
+                    <img src="${character.image}" alt="${character.name}" class="all-characters-imgs">
+                    <div class="all-characters-info">
+                        <h3 class="all-characters-names">${character.name}</h3>
+                        <p class="all-characters-species"><strong>Species</strong>: ${character.species}</p>
+                        <p class="all-characters-status"><strong>Status</strong>: ${character.status}</p>
+                        <p class="all-characters-locations"><strong>Location</strong>: ${character.location.name}</p>
+                    </div>
                 `
                 display.appendChild(allCharactersCard);
                 
@@ -156,24 +161,7 @@ const displayCharacters = () => {
                     .then(characterData => {
                         display.innerHTML = ""
                         
-                        selected.innerHTML = `
-                            <div class="character-container">
-                            <div class="character-info">
-                                    <h2 id="char-name">${characterData.name}</h2>
-                                    <p><strong>Status:</strong> <span id="char-status">${characterData.status}</span></p>
-                                    <p><strong>Species:</strong> <span id="char-species">${characterData.species}</span></p>
-                                    <p><strong>Gender:</strong> <span id="char-gender">${characterData.gender}</span></p>
-                                    <p><strong>Origin:</strong> <span id="char-origin">${characterData.origin.name}</span></p>
-                                    <p><strong>Location:</strong> <span id="char-location">${characterData.location.name}</span></p>
-                                    <button class="like-glyph" data-character-id="${characterData.id}">${EMPTY_HEART}</button>
-                                    <button class="dislike-glyph" data-character-id="${characterData.id}">${DISLIKE_EMPTY}</button>
-                                </div>
-                                <div class="character-image">
-                                    <img id="${characterData.name}" src="https://rickandmortyapi.com/api/character/avatar/${characterData.id}.jpeg" alt="${characterData.name}">
-                                </div>
-                            </div>
-                            
-                            `
+                        selected.innerHTML = createCharacterCard(characterData);
                     })
                 })
                     
@@ -218,14 +206,14 @@ const displayLocations = () => {
             console.log(locations)
             locations.results.forEach( location => {
                 const locationsCard = document.createElement("div");
-                locationsCard.classList.add("all-characters-cards");
+                locationsCard.classList.add("all-locations-cards");
                 
                 locationsCard.innerHTML = `
-                <div class="locations-info">
-                <h3 class="locations-names">${location.name}</h3>
-                <p class="locations-type"><strong>Type</strong>: ${location.type}</p>
-                <p class="locations-dimension"><strong>Dimension</strong>: ${location.dimension}</p>
-                </div>
+                    <div class="locations-info">
+                        <h3 class="locations-names">${location.name}</h3>
+                        <p class="locations-type"><strong>Type</strong>: ${location.type}</p>
+                        <p class="locations-dimension"><strong>Dimension</strong>: ${location.dimension}</p>
+                    </div>
                 `
                 display.appendChild(locationsCard);
 
@@ -267,7 +255,7 @@ const displayEpisodes = () => {
             console.log(episodes)
             episodes.results.forEach( episode => {
                 const episodesCard = document.createElement("div");
-                episodesCard.classList.add("all-characters-cards");
+                episodesCard.classList.add("all-episodes-cards");
                 
                 episodesCard.innerHTML = `
                     <div class="episodes-info">
@@ -393,7 +381,6 @@ const favoriteCharacters = () => {
                 display.appendChild(characterCard);
             });
         })
-        .catch(error => console.error("Error fetching favorites:", error));
     });
 };
 
@@ -519,6 +506,8 @@ const filterCharacters = () => {
                 </div>
                 <button type="submit" id="submit-btn">Submit</button>
             </form>
+
+            <div id="results-container"></div>
         `;
 
         const form = document.querySelector("#filterForm");
@@ -546,22 +535,23 @@ const filterCharacters = () => {
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
+                    
                     data.results.forEach(character => {
-                        const allCharactersCard = document.createElement("div");
-                        allCharactersCard.classList.add("all-characters-cards");
+                        const filteredCharactersCard = document.createElement("div");
+                        filteredCharactersCard.classList.add("all-characters-cards");
                         
-                        allCharactersCard.innerHTML = `
-                        <img src="${character.image}" alt="${character.name}" class="all-characters-imgs">
-                        <div class="all-characters-info">
-                            <h3 class="all-characters-names">${character.name}</h3>
-                            <p class="all-characters-species"><strong>Species</strong>: ${character.species}</p>
-                            <p class="all-characters-status"><strong>Status</strong>: ${character.status}</p>
-                            <p class="all-characters-locations"><strong>Location</strong>: ${character.location.name}</p>
-                        </div>
+                        filteredCharactersCard.innerHTML = `
+                            <img src="${character.image}" alt="${character.name}" class="all-characters-imgs">
+                            <div class="all-characters-info">
+                                <h3 class="all-characters-names">${character.name}</h3>
+                                <p class="all-characters-species"><strong>Species</strong>: ${character.species}</p>
+                                <p class="all-characters-status"><strong>Status</strong>: ${character.status}</p>
+                                <p class="all-characters-locations"><strong>Location</strong>: ${character.location.name}</p>
+                            </div>
                         `
-                        display.appendChild(allCharactersCard);
+                        display.appendChild(filteredCharactersCard);
                         
-                        allCharactersCard.addEventListener("click", () => {
+                        filteredCharactersCard.addEventListener("click", () => {
                             fetch(`https://rickandmortyapi.com/api/character/${character.id}`, {
                                 method: "GET",
                                 headers: {
@@ -573,24 +563,7 @@ const filterCharacters = () => {
                             .then(characterData => {
                                 display.innerHTML = ""
                                 
-                                selected.innerHTML = `
-                                    <div class="character-container">
-                                    <div class="character-info">
-                                            <h2 id="char-name">${characterData.name}</h2>
-                                            <p><strong>Status:</strong> <span id="char-status">${characterData.status}</span></p>
-                                            <p><strong>Species:</strong> <span id="char-species">${characterData.species}</span></p>
-                                            <p><strong>Gender:</strong> <span id="char-gender">${characterData.gender}</span></p>
-                                            <p><strong>Origin:</strong> <span id="char-origin">${characterData.origin.name}</span></p>
-                                            <p><strong>Location:</strong> <span id="char-location">${characterData.location.name}</span></p>
-                                            <button class="like-glyph" data-character-id="${characterData.id}">${EMPTY_HEART}</button>
-                                            <button class="dislike-glyph" data-character-id="${characterData.id}">${DISLIKE_EMPTY}</button>
-                                        </div>
-                                        <div class="character-image">
-                                            <img id="${characterData.name}" src="https://rickandmortyapi.com/api/character/avatar/${characterData.id}.jpeg" alt="${characterData.name}">
-                                        </div>
-                                    </div>
-                                    
-                                `
+                                selected.innerHTML = createCharacterCard(characterData);
                             })
                         })
                     })       
@@ -599,13 +572,16 @@ const filterCharacters = () => {
     });
 };
 
+const main = () => {
+    displayMainCharacters()
+    displayCharacters()
+    displayLocations()
+    displayEpisodes()
+    like()
+    favoriteCharacters()
+    dislike()
+    hated()
+    filterCharacters()
+}
 
-displayMainCharacters()
-displayCharacters()
-displayLocations()
-displayEpisodes()
-like()
-favoriteCharacters()
-dislike()
-hated()
-filterCharacters()
+document.addEventListener("DOMContentLoaded", main)

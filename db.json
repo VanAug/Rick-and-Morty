@@ -111,6 +111,20 @@
         "name": "Earth (Replacement Dimension)"
       },
       "image": "https://rickandmortyapi.com/api/character/avatar/244.jpeg"
+    },
+    {
+      "id": "672",
+      "name": "Mr. Nimbus",
+      "status": "Alive",
+      "species": "Mythological Creature",
+      "gender": "Male",
+      "origin": {
+        "name": "The Ocean"
+      },
+      "location": {
+        "name": "Earth (Replacement Dimension)"
+      },
+      "image": "https://rickandmortyapi.com/api/character/avatar/672.jpeg"
     }
   ],
   "disliked": [
