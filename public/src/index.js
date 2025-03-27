@@ -303,7 +303,7 @@ const like = () => {
                 image: characterContainer.querySelector("img").src
             };
     
-            fetch("http://localhost:3000/favorites", {
+            fetch("https://your-app-name.onrender.com/api/favorites", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -324,7 +324,7 @@ const favoriteCharacters = () => {
     const favorites = document.querySelector("#like");
 
     favorites.addEventListener("click", () => {
-        fetch("http://localhost:3000/favorites", {
+        fetch("https://your-app-name.onrender.com/api/favorites", {
             method: "GET",
             headers: {
                 "Content-Type": "Application/json",
@@ -402,7 +402,7 @@ const dislike = () => {
                 image: characterContainer.querySelector("img").src
             };
     
-            fetch("http://localhost:3000/disliked", {
+            fetch("https://your-app-name.onrender.com/api/dislike", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -419,7 +419,7 @@ const hated = () => {
     const hated = document.querySelector("#dislike");
 
     hated.addEventListener("click", () => {
-        fetch("http://localhost:3000/disliked", {
+        fetch("https://your-app-name.onrender.com/api/dislike", {
             method: "GET",
             headers: {
                 "Content-Type": "Application/json",
