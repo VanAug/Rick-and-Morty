@@ -535,6 +535,7 @@ const filterCharacters = () => {
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
+                    display.innerHTML = ""
                     
                     data.results.forEach(character => {
                         const filteredCharactersCard = document.createElement("div");
@@ -549,6 +550,7 @@ const filterCharacters = () => {
                                 <p class="all-characters-locations"><strong>Location</strong>: ${character.location.name}</p>
                             </div>
                         `
+                        
                         display.appendChild(filteredCharactersCard);
                         
                         filteredCharactersCard.addEventListener("click", () => {
