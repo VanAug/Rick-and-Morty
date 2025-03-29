@@ -1,6 +1,6 @@
 #top-bar {
     height: 30vh;
-    background: rgb(5, 238, 36);
+    background: rgb(75, 86, 133);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,8 +30,9 @@
 }
 
 #selection button {
-    background-color: #073e6b; 
-    color: black;
+    background-color: #c3c7fc; 
+    border-radius: 10px;
+    color: rgb(7, 7, 7);
     font-size: 1.2rem;
     font-weight: bold;
     padding: 12px 20px;
@@ -89,7 +90,7 @@
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background: #525761;
+    background: #5386ee;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -171,11 +172,11 @@
 
 .like-glyph {
     cursor: pointer;
-    background: #525761;
+    background: #fcf9f9;
 }
 .dislike-glyph {
     cursor: pointer;
-    background: #525761;
+    background: #fafbfc;
 }
 
 .activated-heart {
