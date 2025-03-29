@@ -304,7 +304,7 @@ const like = () => {
                 image: characterContainer.querySelector("img").src
             };
     
-            fetch("https://rick-and-morty-nlgv.onrender.com/api/favorites", {
+            fetch("https://my-app-backend-yrfn.onrender.com/api/favorites", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -326,7 +326,7 @@ const favoriteCharacters = () => {
     const favorites = document.querySelector("#like");
 
     favorites.addEventListener("click", () => {
-        fetch("https://rick-and-morty-nlgv.onrender.com/api/favorites", {
+        fetch("https://my-app-backend-yrfn.onrender.com/api/favorites", {
             method: "GET",
             headers: {
                 "Content-Type": "Application/json",
@@ -404,7 +404,7 @@ const dislike = () => {
                 image: characterContainer.querySelector("img").src
             };
     
-            fetch("https://rick-and-morty-nlgv.onrender.com/api/disliked", {
+            fetch("https://my-app-backend-yrfn.onrender.com/api/disliked", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -425,7 +425,7 @@ const hated = () => {
     const hated = document.querySelector("#dislike");
 
     hated.addEventListener("click", () => {
-        fetch("https://rick-and-morty-nlgv.onrender.com/api/disliked", {
+        fetch("https://my-app-backend-yrfn.onrender.com/api/disliked", {
             method: "GET",
             headers: {
                 "Content-Type": "Application/json",
